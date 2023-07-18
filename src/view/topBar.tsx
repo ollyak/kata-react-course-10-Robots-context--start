@@ -7,15 +7,22 @@ interface TopBarProps {
 
 export function TopBar({ children }: TopBarProps) {
   return (
-    <Div>
-      {children}
-      <img className="logo" src="./icons/logo.svg" alt="logo" />
-    </Div>
+    <>
+      <Div>
+        {children}
+        <img className="logo" src="./icons/logo.svg" alt="logo" />
+      </Div>
+      <Spacer/>
+    </>
   );
 }
 
 const spin = keyframes`
   to {transform: rotate(360deg)}
+`;
+
+const Spacer = styled.div`
+  height: 200px;
 `;
 
 const Div = styled.div`
@@ -28,6 +35,7 @@ const Div = styled.div`
   position: fixed;
   top: 0;
   left: 0;
+  z-index: 1;
 
   /* display: flex;
   align-items: center;
