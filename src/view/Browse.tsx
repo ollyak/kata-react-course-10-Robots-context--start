@@ -1,26 +1,11 @@
 import styled from "styled-components";
-import { useEffect, useState } from "react";
 import { List } from "./list.tsx";
-import { Robot } from "../types.ts";
 import { Filter } from "./filter.tsx";
 import { Profile } from "./profile.tsx";
-import { getRobotsList } from "../api/robots.api.ts";
+import { useRobotsContext } from "../state/Robots.context.tsx";
 
 export function Browse() {
-  const [robotsList, setRobotsList] = useState<Robot[]>([]);
-  const [selectedProfile, setSelectedProfile] = useState<Robot>();
-  const [isLoading, setIsLoading] = useState(true);
-  const [errorMsg, setErrorMsg] = useState("");
-
-  useEffect(() => {
-    (async () => {
-      const result = await getRobotsList();
-      setRobotsList(result);
-      setSelectedProfile(result[0]);
-      setIsLoading(false);
-    })().catch((error: unknown) => setErrorMsg(`fetch operation failed: ${(error as Error).message}`));
-  }, []);
-
+  const { isLoading, errorMsg, robotsList, setRobotsList, selectedProfile, setSelectedProfile } = useRobotsContext();
   return (
     <Div>
       {/*<TopBar><h1>Pick a Bot</h1></TopBar>*/}
